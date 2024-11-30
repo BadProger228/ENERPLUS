@@ -5,6 +5,7 @@ namespace ENERPLUS
         public Form1()
         {
             InitializeComponent();
+            string str = "Hello world";
         }
     }
 }
