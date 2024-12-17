@@ -1,4 +1,6 @@
-﻿namespace ENERPLUS
+﻿using System.Drawing.Drawing2D;
+
+namespace ENERPLUS
 {
     partial class Form1
     {
@@ -19,6 +21,65 @@
             }
             base.Dispose(disposing);
         }
+        private void ApplyModernStyle()
+        {
+            // Общие настройки формы
+            this.BackColor = Color.LightGray;
+            this.Font = new Font("Segoe UI", 9F, FontStyle.Regular);
+
+            // Кастомизация кнопок
+            foreach (Control control in this.Controls)
+            {
+                if (control is Button button)
+                {
+                    button.BackColor = Color.FromArgb(0, 120, 215); // Синий цвет
+                    button.ForeColor = Color.White;
+                    button.FlatStyle = FlatStyle.Flat;
+                    button.FlatAppearance.BorderSize = 0;
+                    button.Cursor = Cursors.Hand;
+                    button.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+
+                    // Скругленные углы
+                    button.Paint += (sender, e) =>
+                    {
+                        Rectangle bounds = button.ClientRectangle;
+                        using (GraphicsPath path = RoundedRectangle(bounds, 8))
+                        {
+                            button.Region = new Region(path);
+                        }
+                    };
+                }
+                else if (control is TextBox textBox)
+                {
+                    textBox.BorderStyle = BorderStyle.FixedSingle;
+                    textBox.BackColor = Color.White;
+                }
+                else if (control is ListBox listBox)
+                {
+                    listBox.BorderStyle = BorderStyle.FixedSingle;
+                    listBox.BackColor = Color.White;
+                }
+            }
+
+            // Меню (MenuStrip)
+            menuStrip1.BackColor = Color.FromArgb(240, 240, 240);
+            menuStrip1.RenderMode = ToolStripRenderMode.Professional;
+        }
+
+        private GraphicsPath RoundedRectangle(Rectangle bounds, int radius)
+        {
+            GraphicsPath path = new GraphicsPath();
+            int diameter = radius * 2;
+
+            path.StartFigure();
+            path.AddArc(bounds.X, bounds.Y, diameter, diameter, 180, 90);
+            path.AddArc(bounds.Right - diameter, bounds.Y, diameter, diameter, 270, 90);
+            path.AddArc(bounds.Right - diameter, bounds.Bottom - diameter, diameter, diameter, 0, 90);
+            path.AddArc(bounds.X, bounds.Bottom - diameter, diameter, diameter, 90, 90);
+            path.CloseFigure();
+
+            return path;
+        }
 
         #region Windows Form Designer generated code
 
@@ -28,226 +89,618 @@
         /// </summary>
         private void InitializeComponent()
         {
-            listBox1 = new ListBox();
-            listBox2 = new ListBox();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
-            textBox4 = new TextBox();
-            textBox5 = new TextBox();
-            textBox6 = new TextBox();
-            textBox7 = new TextBox();
-            textBox8 = new TextBox();
-            textBox15 = new TextBox();
-            textBox16 = new TextBox();
-            textBox17 = new TextBox();
-            label1 = new Label();
-            comboBox1 = new ComboBox();
-            button1 = new Button();
-            button2 = new Button();
-            listBox3 = new ListBox();
-            button3 = new Button();
+            components = new System.ComponentModel.Container();
+            ZoneListBox = new ListBox();
+            ZoneListBoxContextMenu = new ContextMenuStrip(components);
+            deleteToolStripMenuItem = new ToolStripMenuItem();
+            BuildingSurfaceListBox = new ListBox();
+            BuuildSurfaceListBoxContextMenu = new ContextMenuStrip(components);
+            deleteToolStripMenuItem1 = new ToolStripMenuItem();
+            ZoneNameTextBox = new TextBox();
+            XTextBox = new TextBox();
+            YTextBox = new TextBox();
+            ZTextBox = new TextBox();
+            SurfaceNameTextBox = new TextBox();
+            VerticalX = new TextBox();
+            VerticalY = new TextBox();
+            VerticalZ = new TextBox();
+            TypeOfSurfaceComboBox = new ComboBox();
+            AddZoneButton = new Button();
+            EditZoneButton = new Button();
+            VerticalesListBox = new ListBox();
+            VerticalesListBoxContextMenu = new ContextMenuStrip(components);
+            deleteToolStripMenuItem2 = new ToolStripMenuItem();
+            AddSurfaceButton = new Button();
+            EditSurfaceButton = new Button();
+            AddVerticalButton = new Button();
+            EditVerticalButton = new Button();
+            MaterialNameTextBox = new TextBox();
+            ThicknessTextBox = new TextBox();
+            ConductivityTextBox = new TextBox();
+            DensityTextBox = new TextBox();
+            SpecificHeatTextBox = new TextBox();
+            OutsideBoundaryConditionComboBox = new ComboBox();
+            SunStatusComboBox = new ComboBox();
+            WindStatusComboBox = new ComboBox();
+            XLabel = new Label();
+            YLable = new Label();
+            ZLable = new Label();
+            zoneNameLabel = new Label();
+            SurfaceNameLabel = new Label();
+            TypeOfSurfaceLabel = new Label();
+            OutsideBoundaryConditionLabel = new Label();
+            MaterialNameLabel = new Label();
+            ThicknessLabel = new Label();
+            ConductivityLabel = new Label();
+            DensityLabel = new Label();
+            SpecificHeatLabel = new Label();
+            XVerticalLabel = new Label();
+            YVerticalLabel = new Label();
+            ZVerticalLabel = new Label();
+            menuStrip1 = new MenuStrip();
+            fileToolStripMenuItem = new ToolStripMenuItem();
+            openToolStripMenuItem = new ToolStripMenuItem();
+            saveToolStripMenuItem = new ToolStripMenuItem();
+            saveAsToolStripMenuItem = new ToolStripMenuItem();
+            ZoneListBoxContextMenu.SuspendLayout();
+            BuuildSurfaceListBoxContextMenu.SuspendLayout();
+            VerticalesListBoxContextMenu.SuspendLayout();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
-            // listBox1
+            // ZoneListBox
             // 
-            listBox1.FormattingEnabled = true;
-            listBox1.ItemHeight = 15;
-            listBox1.Location = new Point(28, 32);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(150, 184);
-            listBox1.TabIndex = 0;
+            ZoneListBox.ContextMenuStrip = ZoneListBoxContextMenu;
+            ZoneListBox.FormattingEnabled = true;
+            ZoneListBox.ItemHeight = 15;
+            ZoneListBox.Location = new Point(28, 96);
+            ZoneListBox.Name = "ZoneListBox";
+            ZoneListBox.Size = new Size(150, 184);
+            ZoneListBox.TabIndex = 0;
+            ZoneListBox.SelectedIndexChanged += ZoneListBox_SelectedIndexChanged;
             // 
-            // listBox2
+            // ZoneListBoxContextMenu
             // 
-            listBox2.FormattingEnabled = true;
-            listBox2.ItemHeight = 15;
-            listBox2.Location = new Point(232, 32);
-            listBox2.Name = "listBox2";
-            listBox2.Size = new Size(139, 184);
-            listBox2.TabIndex = 1;
+            ZoneListBoxContextMenu.Items.AddRange(new ToolStripItem[] { deleteToolStripMenuItem });
+            ZoneListBoxContextMenu.Name = "ZoneListBoxContextMenu";
+            ZoneListBoxContextMenu.Size = new Size(108, 26);
             // 
-            // textBox1
+            // deleteToolStripMenuItem
             // 
-            textBox1.Location = new Point(28, 237);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(150, 23);
-            textBox1.TabIndex = 2;
+            deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            deleteToolStripMenuItem.Size = new Size(107, 22);
+            deleteToolStripMenuItem.Text = "Delete";
+            deleteToolStripMenuItem.Click += deleteToolStripMenuItem_Click;
             // 
-            // textBox2
+            // BuildingSurfaceListBox
             // 
-            textBox2.Location = new Point(59, 266);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(24, 23);
-            textBox2.TabIndex = 3;
+            BuildingSurfaceListBox.ContextMenuStrip = BuuildSurfaceListBoxContextMenu;
+            BuildingSurfaceListBox.FormattingEnabled = true;
+            BuildingSurfaceListBox.ItemHeight = 15;
+            BuildingSurfaceListBox.Location = new Point(232, 96);
+            BuildingSurfaceListBox.Name = "BuildingSurfaceListBox";
+            BuildingSurfaceListBox.Size = new Size(298, 184);
+            BuildingSurfaceListBox.TabIndex = 1;
+            BuildingSurfaceListBox.SelectedIndexChanged += BuildingSurfaceListBox_SelectedIndexChanged;
             // 
-            // textBox3
+            // BuuildSurfaceListBoxContextMenu
             // 
-            textBox3.Location = new Point(105, 266);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(29, 23);
-            textBox3.TabIndex = 4;
+            BuuildSurfaceListBoxContextMenu.Items.AddRange(new ToolStripItem[] { deleteToolStripMenuItem1 });
+            BuuildSurfaceListBoxContextMenu.Name = "BuuildSurfaceListBoxContextMenu";
+            BuuildSurfaceListBoxContextMenu.Size = new Size(108, 26);
             // 
-            // textBox4
+            // deleteToolStripMenuItem1
             // 
-            textBox4.Location = new Point(154, 266);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(24, 23);
-            textBox4.TabIndex = 5;
+            deleteToolStripMenuItem1.Name = "deleteToolStripMenuItem1";
+            deleteToolStripMenuItem1.Size = new Size(107, 22);
+            deleteToolStripMenuItem1.Text = "Delete";
+            deleteToolStripMenuItem1.Click += deleteToolStripMenuItem1_Click;
             // 
-            // textBox5
+            // ZoneNameTextBox
             // 
-            textBox5.Location = new Point(232, 244);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(139, 23);
-            textBox5.TabIndex = 6;
+            ZoneNameTextBox.Location = new Point(28, 317);
+            ZoneNameTextBox.Name = "ZoneNameTextBox";
+            ZoneNameTextBox.Size = new Size(150, 23);
+            ZoneNameTextBox.TabIndex = 2;
             // 
-            // textBox6
+            // XTextBox
             // 
-            textBox6.Location = new Point(424, 244);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(28, 23);
-            textBox6.TabIndex = 7;
+            XTextBox.Location = new Point(41, 346);
+            XTextBox.Name = "XTextBox";
+            XTextBox.Size = new Size(27, 23);
+            XTextBox.TabIndex = 3;
             // 
-            // textBox7
+            // YTextBox
             // 
-            textBox7.Location = new Point(473, 244);
-            textBox7.Name = "textBox7";
-            textBox7.Size = new Size(28, 23);
-            textBox7.TabIndex = 7;
+            YTextBox.Location = new Point(99, 345);
+            YTextBox.Name = "YTextBox";
+            YTextBox.Size = new Size(27, 23);
+            YTextBox.TabIndex = 4;
             // 
-            // textBox8
+            // ZTextBox
             // 
-            textBox8.Location = new Point(520, 244);
-            textBox8.Name = "textBox8";
-            textBox8.Size = new Size(28, 23);
-            textBox8.TabIndex = 7;
+            ZTextBox.Location = new Point(151, 346);
+            ZTextBox.Name = "ZTextBox";
+            ZTextBox.Size = new Size(27, 23);
+            ZTextBox.TabIndex = 5;
             // 
-            // textBox15
+            // SurfaceNameTextBox
             // 
-            textBox15.Location = new Point(264, 284);
-            textBox15.Name = "textBox15";
-            textBox15.Size = new Size(28, 23);
-            textBox15.TabIndex = 7;
+            SurfaceNameTextBox.Location = new Point(232, 308);
+            SurfaceNameTextBox.Name = "SurfaceNameTextBox";
+            SurfaceNameTextBox.Size = new Size(157, 23);
+            SurfaceNameTextBox.TabIndex = 6;
             // 
-            // textBox16
+            // VerticalX
             // 
-            textBox16.Location = new Point(309, 284);
-            textBox16.Name = "textBox16";
-            textBox16.Size = new Size(28, 23);
-            textBox16.TabIndex = 7;
+            VerticalX.Location = new Point(628, 308);
+            VerticalX.Name = "VerticalX";
+            VerticalX.Size = new Size(27, 23);
+            VerticalX.TabIndex = 7;
             // 
-            // textBox17
+            // VerticalY
             // 
-            textBox17.Location = new Point(343, 284);
-            textBox17.Name = "textBox17";
-            textBox17.Size = new Size(28, 23);
-            textBox17.TabIndex = 7;
+            VerticalY.Location = new Point(684, 308);
+            VerticalY.Name = "VerticalY";
+            VerticalY.Size = new Size(27, 23);
+            VerticalY.TabIndex = 7;
             // 
-            // label1
+            // VerticalZ
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(202, 287);
-            label1.Name = "label1";
-            label1.Size = new Size(56, 15);
-            label1.TabIndex = 8;
-            label1.Text = "Optional:";
+            VerticalZ.Location = new Point(731, 308);
+            VerticalZ.Name = "VerticalZ";
+            VerticalZ.Size = new Size(27, 23);
+            VerticalZ.TabIndex = 7;
             // 
-            // comboBox1
+            // TypeOfSurfaceComboBox
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(242, 316);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(129, 23);
-            comboBox1.TabIndex = 9;
+            TypeOfSurfaceComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            TypeOfSurfaceComboBox.FormattingEnabled = true;
+            TypeOfSurfaceComboBox.Items.AddRange(new object[] { "Wall", "Floor", "Roof", "Window", "Door", "Ceiling", "Foundation" });
+            TypeOfSurfaceComboBox.Location = new Point(232, 369);
+            TypeOfSurfaceComboBox.Name = "TypeOfSurfaceComboBox";
+            TypeOfSurfaceComboBox.Size = new Size(157, 23);
+            TypeOfSurfaceComboBox.TabIndex = 9;
             // 
-            // button1
+            // AddZoneButton
             // 
-            button1.Location = new Point(44, 302);
-            button1.Name = "button1";
-            button1.Size = new Size(119, 32);
-            button1.TabIndex = 10;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
+            AddZoneButton.Location = new Point(12, 389);
+            AddZoneButton.Name = "AddZoneButton";
+            AddZoneButton.Size = new Size(84, 32);
+            AddZoneButton.TabIndex = 10;
+            AddZoneButton.Text = "Add Zone";
+            AddZoneButton.UseVisualStyleBackColor = true;
+            AddZoneButton.Click += AddZoneButton_Click;
             // 
-            // button2
+            // EditZoneButton
             // 
-            button2.Location = new Point(269, 345);
-            button2.Name = "button2";
-            button2.Size = new Size(102, 43);
-            button2.TabIndex = 11;
-            button2.Text = "button2";
-            button2.UseVisualStyleBackColor = true;
+            EditZoneButton.Location = new Point(102, 389);
+            EditZoneButton.Name = "EditZoneButton";
+            EditZoneButton.Size = new Size(86, 32);
+            EditZoneButton.TabIndex = 11;
+            EditZoneButton.Text = "Edit Zone";
+            EditZoneButton.UseVisualStyleBackColor = true;
+            EditZoneButton.Click += EditZoneButton_Click;
             // 
-            // listBox3
+            // VerticalesListBox
             // 
-            listBox3.FormattingEnabled = true;
-            listBox3.ItemHeight = 15;
-            listBox3.Location = new Point(403, 32);
-            listBox3.Name = "listBox3";
-            listBox3.Size = new Size(145, 184);
-            listBox3.TabIndex = 12;
+            VerticalesListBox.ContextMenuStrip = VerticalesListBoxContextMenu;
+            VerticalesListBox.FormattingEnabled = true;
+            VerticalesListBox.ItemHeight = 15;
+            VerticalesListBox.Location = new Point(597, 96);
+            VerticalesListBox.Name = "VerticalesListBox";
+            VerticalesListBox.Size = new Size(145, 184);
+            VerticalesListBox.TabIndex = 12;
+            VerticalesListBox.SelectedIndexChanged += VerticalesListBox_SelectedIndexChanged;
             // 
-            // button3
+            // VerticalesListBoxContextMenu
             // 
-            button3.Location = new Point(447, 302);
-            button3.Name = "button3";
-            button3.Size = new Size(101, 52);
-            button3.TabIndex = 13;
-            button3.Text = "button3";
-            button3.UseVisualStyleBackColor = true;
+            VerticalesListBoxContextMenu.Items.AddRange(new ToolStripItem[] { deleteToolStripMenuItem2 });
+            VerticalesListBoxContextMenu.Name = "VerticalesListBoxContextMenu";
+            VerticalesListBoxContextMenu.Size = new Size(108, 26);
+            // 
+            // deleteToolStripMenuItem2
+            // 
+            deleteToolStripMenuItem2.Name = "deleteToolStripMenuItem2";
+            deleteToolStripMenuItem2.Size = new Size(107, 22);
+            deleteToolStripMenuItem2.Text = "Delete";
+            deleteToolStripMenuItem2.Click += deleteToolStripMenuItem2_Click;
+            // 
+            // AddSurfaceButton
+            // 
+            AddSurfaceButton.Location = new Point(262, 522);
+            AddSurfaceButton.Name = "AddSurfaceButton";
+            AddSurfaceButton.Size = new Size(116, 41);
+            AddSurfaceButton.TabIndex = 13;
+            AddSurfaceButton.Text = "Add Surface";
+            AddSurfaceButton.UseVisualStyleBackColor = true;
+            AddSurfaceButton.Click += AddSurfaceButton_Click;
+            // 
+            // EditSurfaceButton
+            // 
+            EditSurfaceButton.Location = new Point(396, 522);
+            EditSurfaceButton.Name = "EditSurfaceButton";
+            EditSurfaceButton.Size = new Size(111, 41);
+            EditSurfaceButton.TabIndex = 13;
+            EditSurfaceButton.Text = "Edit surface";
+            EditSurfaceButton.UseVisualStyleBackColor = true;
+            EditSurfaceButton.Click += EditSurfaceButton_Click;
+            // 
+            // AddVerticalButton
+            // 
+            AddVerticalButton.Location = new Point(564, 353);
+            AddVerticalButton.Name = "AddVerticalButton";
+            AddVerticalButton.Size = new Size(94, 41);
+            AddVerticalButton.TabIndex = 13;
+            AddVerticalButton.Text = "Add Vertical";
+            AddVerticalButton.UseVisualStyleBackColor = true;
+            AddVerticalButton.Click += AddVerticalButton_Click;
+            // 
+            // EditVerticalButton
+            // 
+            EditVerticalButton.Location = new Point(664, 353);
+            EditVerticalButton.Name = "EditVerticalButton";
+            EditVerticalButton.Size = new Size(94, 41);
+            EditVerticalButton.TabIndex = 13;
+            EditVerticalButton.Text = "Edit Vertical";
+            EditVerticalButton.UseVisualStyleBackColor = true;
+            EditVerticalButton.Click += EditVerticalButton_Click;
+            // 
+            // MaterialNameTextBox
+            // 
+            MaterialNameTextBox.Location = new Point(443, 308);
+            MaterialNameTextBox.Name = "MaterialNameTextBox";
+            MaterialNameTextBox.Size = new Size(100, 23);
+            MaterialNameTextBox.TabIndex = 14;
+            // 
+            // ThicknessTextBox
+            // 
+            ThicknessTextBox.Location = new Point(443, 356);
+            ThicknessTextBox.Name = "ThicknessTextBox";
+            ThicknessTextBox.Size = new Size(100, 23);
+            ThicknessTextBox.TabIndex = 16;
+            // 
+            // ConductivityTextBox
+            // 
+            ConductivityTextBox.Location = new Point(443, 398);
+            ConductivityTextBox.Name = "ConductivityTextBox";
+            ConductivityTextBox.Size = new Size(100, 23);
+            ConductivityTextBox.TabIndex = 17;
+            // 
+            // DensityTextBox
+            // 
+            DensityTextBox.Location = new Point(444, 441);
+            DensityTextBox.Name = "DensityTextBox";
+            DensityTextBox.Size = new Size(100, 23);
+            DensityTextBox.TabIndex = 18;
+            // 
+            // SpecificHeatTextBox
+            // 
+            SpecificHeatTextBox.Location = new Point(443, 485);
+            SpecificHeatTextBox.Name = "SpecificHeatTextBox";
+            SpecificHeatTextBox.Size = new Size(100, 23);
+            SpecificHeatTextBox.TabIndex = 18;
+            // 
+            // OutsideBoundaryConditionComboBox
+            // 
+            OutsideBoundaryConditionComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            OutsideBoundaryConditionComboBox.FormattingEnabled = true;
+            OutsideBoundaryConditionComboBox.Items.AddRange(new object[] { "Outdoors", "Adiabatic" });
+            OutsideBoundaryConditionComboBox.Location = new Point(232, 425);
+            OutsideBoundaryConditionComboBox.Name = "OutsideBoundaryConditionComboBox";
+            OutsideBoundaryConditionComboBox.Size = new Size(157, 23);
+            OutsideBoundaryConditionComboBox.TabIndex = 19;
+            // 
+            // SunStatusComboBox
+            // 
+            SunStatusComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            SunStatusComboBox.FormattingEnabled = true;
+            SunStatusComboBox.Items.AddRange(new object[] { "SunExposed", "NoSun" });
+            SunStatusComboBox.Location = new Point(28, 48);
+            SunStatusComboBox.Name = "SunStatusComboBox";
+            SunStatusComboBox.Size = new Size(121, 23);
+            SunStatusComboBox.TabIndex = 20;
+            SunStatusComboBox.SelectedIndexChanged += SunStatusComboBox_SelectedIndexChanged;
+            // 
+            // WindStatusComboBox
+            // 
+            WindStatusComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            WindStatusComboBox.FormattingEnabled = true;
+            WindStatusComboBox.Items.AddRange(new object[] { "WindExposed", "NoWind" });
+            WindStatusComboBox.Location = new Point(167, 48);
+            WindStatusComboBox.Name = "WindStatusComboBox";
+            WindStatusComboBox.Size = new Size(121, 23);
+            WindStatusComboBox.TabIndex = 21;
+            WindStatusComboBox.SelectedIndexChanged += WindStatusComboBox_SelectedIndexChanged;
+            // 
+            // XLabel
+            // 
+            XLabel.AutoSize = true;
+            XLabel.Location = new Point(18, 351);
+            XLabel.Name = "XLabel";
+            XLabel.Size = new Size(17, 15);
+            XLabel.TabIndex = 23;
+            XLabel.Text = "X:";
+            // 
+            // YLable
+            // 
+            YLable.AutoSize = true;
+            YLable.Location = new Point(79, 351);
+            YLable.Name = "YLable";
+            YLable.Size = new Size(17, 15);
+            YLable.TabIndex = 24;
+            YLable.Text = "Y:";
+            YLable.Click += YLable_Click;
+            // 
+            // ZLable
+            // 
+            ZLable.AutoSize = true;
+            ZLable.Location = new Point(132, 351);
+            ZLable.Name = "ZLable";
+            ZLable.Size = new Size(17, 15);
+            ZLable.TabIndex = 25;
+            ZLable.Text = "Z:";
+            // 
+            // zoneNameLabel
+            // 
+            zoneNameLabel.AutoSize = true;
+            zoneNameLabel.Location = new Point(12, 299);
+            zoneNameLabel.Name = "zoneNameLabel";
+            zoneNameLabel.Size = new Size(70, 15);
+            zoneNameLabel.TabIndex = 26;
+            zoneNameLabel.Text = "Zone name:";
+            // 
+            // SurfaceNameLabel
+            // 
+            SurfaceNameLabel.AutoSize = true;
+            SurfaceNameLabel.Location = new Point(232, 290);
+            SurfaceNameLabel.Name = "SurfaceNameLabel";
+            SurfaceNameLabel.Size = new Size(82, 15);
+            SurfaceNameLabel.TabIndex = 27;
+            SurfaceNameLabel.Text = "Surface name:";
+            SurfaceNameLabel.Click += SurfaceNameLabel_Click;
+            // 
+            // TypeOfSurfaceLabel
+            // 
+            TypeOfSurfaceLabel.AutoSize = true;
+            TypeOfSurfaceLabel.Location = new Point(232, 353);
+            TypeOfSurfaceLabel.Name = "TypeOfSurfaceLabel";
+            TypeOfSurfaceLabel.Size = new Size(96, 15);
+            TypeOfSurfaceLabel.TabIndex = 28;
+            TypeOfSurfaceLabel.Text = "Type Of Surface: ";
+            // 
+            // OutsideBoundaryConditionLabel
+            // 
+            OutsideBoundaryConditionLabel.AutoSize = true;
+            OutsideBoundaryConditionLabel.Location = new Point(232, 407);
+            OutsideBoundaryConditionLabel.Name = "OutsideBoundaryConditionLabel";
+            OutsideBoundaryConditionLabel.Size = new Size(161, 15);
+            OutsideBoundaryConditionLabel.TabIndex = 29;
+            OutsideBoundaryConditionLabel.Text = "Outside Boundary Condition:";
+            // 
+            // MaterialNameLabel
+            // 
+            MaterialNameLabel.AutoSize = true;
+            MaterialNameLabel.Location = new Point(444, 290);
+            MaterialNameLabel.Name = "MaterialNameLabel";
+            MaterialNameLabel.Size = new Size(86, 15);
+            MaterialNameLabel.TabIndex = 30;
+            MaterialNameLabel.Text = "Material name:";
+            // 
+            // ThicknessLabel
+            // 
+            ThicknessLabel.AutoSize = true;
+            ThicknessLabel.Location = new Point(445, 338);
+            ThicknessLabel.Name = "ThicknessLabel";
+            ThicknessLabel.Size = new Size(62, 15);
+            ThicknessLabel.TabIndex = 31;
+            ThicknessLabel.Text = "Thickness:";
+            // 
+            // ConductivityLabel
+            // 
+            ConductivityLabel.AutoSize = true;
+            ConductivityLabel.Location = new Point(445, 382);
+            ConductivityLabel.Name = "ConductivityLabel";
+            ConductivityLabel.Size = new Size(75, 15);
+            ConductivityLabel.TabIndex = 32;
+            ConductivityLabel.Text = "Conductivity";
+            // 
+            // DensityLabel
+            // 
+            DensityLabel.AutoSize = true;
+            DensityLabel.Location = new Point(444, 423);
+            DensityLabel.Name = "DensityLabel";
+            DensityLabel.Size = new Size(52, 15);
+            DensityLabel.TabIndex = 33;
+            DensityLabel.Text = "Density: ";
+            // 
+            // SpecificHeatLabel
+            // 
+            SpecificHeatLabel.AutoSize = true;
+            SpecificHeatLabel.Location = new Point(445, 467);
+            SpecificHeatLabel.Name = "SpecificHeatLabel";
+            SpecificHeatLabel.Size = new Size(82, 15);
+            SpecificHeatLabel.TabIndex = 34;
+            SpecificHeatLabel.Text = "Specific Heat: ";
+            SpecificHeatLabel.Click += SpecificHeatLabel_Click;
+            // 
+            // XVerticalLabel
+            // 
+            XVerticalLabel.AutoSize = true;
+            XVerticalLabel.Location = new Point(605, 311);
+            XVerticalLabel.Name = "XVerticalLabel";
+            XVerticalLabel.Size = new Size(17, 15);
+            XVerticalLabel.TabIndex = 35;
+            XVerticalLabel.Text = "X:";
+            // 
+            // YVerticalLabel
+            // 
+            YVerticalLabel.AutoSize = true;
+            YVerticalLabel.Location = new Point(661, 311);
+            YVerticalLabel.Name = "YVerticalLabel";
+            YVerticalLabel.Size = new Size(17, 15);
+            YVerticalLabel.TabIndex = 36;
+            YVerticalLabel.Text = "Y:";
+            // 
+            // ZVerticalLabel
+            // 
+            ZVerticalLabel.AutoSize = true;
+            ZVerticalLabel.Location = new Point(717, 311);
+            ZVerticalLabel.Name = "ZVerticalLabel";
+            ZVerticalLabel.Size = new Size(17, 15);
+            ZVerticalLabel.TabIndex = 37;
+            ZVerticalLabel.Text = "Z:";
+            // 
+            // menuStrip1
+            // 
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(770, 24);
+            menuStrip1.TabIndex = 38;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openToolStripMenuItem, saveToolStripMenuItem, saveAsToolStripMenuItem });
+            fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            fileToolStripMenuItem.Size = new Size(37, 20);
+            fileToolStripMenuItem.Text = "File";
+            // 
+            // openToolStripMenuItem
+            // 
+            openToolStripMenuItem.Name = "openToolStripMenuItem";
+            openToolStripMenuItem.Size = new Size(112, 22);
+            openToolStripMenuItem.Text = "Open";
+            openToolStripMenuItem.Click += openToolStripMenuItem_Click;
+            // 
+            // saveToolStripMenuItem
+            // 
+            saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            saveToolStripMenuItem.Size = new Size(112, 22);
+            saveToolStripMenuItem.Text = "Save";
+            saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
+            // 
+            // saveAsToolStripMenuItem
+            // 
+            saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+            saveAsToolStripMenuItem.Size = new Size(112, 22);
+            saveAsToolStripMenuItem.Text = "Save as";
+            saveAsToolStripMenuItem.Click += saveAsToolStripMenuItem_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(594, 466);
-            Controls.Add(button3);
-            Controls.Add(listBox3);
-            Controls.Add(button2);
-            Controls.Add(button1);
-            Controls.Add(comboBox1);
-            Controls.Add(label1);
-            Controls.Add(textBox17);
-            Controls.Add(textBox16);
-            Controls.Add(textBox15);
-            Controls.Add(textBox8);
-            Controls.Add(textBox7);
-            Controls.Add(textBox6);
-            Controls.Add(textBox5);
-            Controls.Add(textBox4);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
-            Controls.Add(listBox2);
-            Controls.Add(listBox1);
+            ClientSize = new Size(770, 575);
+            Controls.Add(menuStrip1);
+            Controls.Add(ZVerticalLabel);
+            Controls.Add(YVerticalLabel);
+            Controls.Add(XVerticalLabel);
+            Controls.Add(SpecificHeatLabel);
+            Controls.Add(DensityLabel);
+            Controls.Add(ConductivityLabel);
+            Controls.Add(ThicknessLabel);
+            Controls.Add(MaterialNameLabel);
+            Controls.Add(OutsideBoundaryConditionLabel);
+            Controls.Add(TypeOfSurfaceLabel);
+            Controls.Add(SurfaceNameLabel);
+            Controls.Add(zoneNameLabel);
+            Controls.Add(ZLable);
+            Controls.Add(YLable);
+            Controls.Add(XLabel);
+            Controls.Add(WindStatusComboBox);
+            Controls.Add(SunStatusComboBox);
+            Controls.Add(OutsideBoundaryConditionComboBox);
+            Controls.Add(SpecificHeatTextBox);
+            Controls.Add(DensityTextBox);
+            Controls.Add(ConductivityTextBox);
+            Controls.Add(ThicknessTextBox);
+            Controls.Add(MaterialNameTextBox);
+            Controls.Add(EditVerticalButton);
+            Controls.Add(AddVerticalButton);
+            Controls.Add(EditSurfaceButton);
+            Controls.Add(AddSurfaceButton);
+            Controls.Add(VerticalesListBox);
+            Controls.Add(EditZoneButton);
+            Controls.Add(AddZoneButton);
+            Controls.Add(TypeOfSurfaceComboBox);
+            Controls.Add(VerticalZ);
+            Controls.Add(VerticalY);
+            Controls.Add(VerticalX);
+            Controls.Add(SurfaceNameTextBox);
+            Controls.Add(ZTextBox);
+            Controls.Add(YTextBox);
+            Controls.Add(XTextBox);
+            Controls.Add(ZoneNameTextBox);
+            Controls.Add(BuildingSurfaceListBox);
+            Controls.Add(ZoneListBox);
+            MainMenuStrip = menuStrip1;
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
+            ZoneListBoxContextMenu.ResumeLayout(false);
+            BuuildSurfaceListBoxContextMenu.ResumeLayout(false);
+            VerticalesListBoxContextMenu.ResumeLayout(false);
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private ListBox listBox1;
-        private ListBox listBox2;
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private TextBox textBox3;
-        private TextBox textBox4;
-        private TextBox textBox5;
-        private TextBox textBox6;
-        private TextBox textBox7;
-        private TextBox textBox8;
-        private TextBox textBox15;
-        private TextBox textBox16;
-        private TextBox textBox17;
-        private Label label1;
-        private ComboBox comboBox1;
-        private Button button1;
-        private Button button2;
-        private ListBox listBox3;
-        private Button button3;
+        private ListBox ZoneListBox;
+        private ListBox BuildingSurfaceListBox;
+        private TextBox ZoneNameTextBox;
+        private TextBox XTextBox;
+        private TextBox YTextBox;
+        private TextBox ZTextBox;
+        private TextBox SurfaceNameTextBox;
+        private TextBox VerticalX;
+        private TextBox VerticalY;
+        private TextBox VerticalZ;
+        private ComboBox TypeOfSurfaceComboBox;
+        private Button AddZoneButton;
+        private Button EditZoneButton;
+        private ListBox VerticalesListBox;
+        private Button AddSurfaceButton;
+        private Button EditSurfaceButton;
+        private Button AddVerticalButton;
+        private Button EditVerticalButton;
+        private TextBox MaterialNameTextBox;
+        private TextBox ThicknessTextBox;
+        private TextBox ConductivityTextBox;
+        private TextBox DensityTextBox;
+        private TextBox SpecificHeatTextBox;
+        private ContextMenuStrip ZoneListBoxContextMenu;
+        private ToolStripMenuItem deleteToolStripMenuItem;
+        private ContextMenuStrip BuuildSurfaceListBoxContextMenu;
+        private ToolStripMenuItem deleteToolStripMenuItem1;
+        private ContextMenuStrip VerticalesListBoxContextMenu;
+        private ToolStripMenuItem deleteToolStripMenuItem2;
+        private ComboBox OutsideBoundaryConditionComboBox;
+        private ComboBox SunStatusComboBox;
+        private ComboBox WindStatusComboBox;
+        private Label XLabel;
+        private Label YLable;
+        private Label ZLable;
+        private Label zoneNameLabel;
+        private Label SurfaceNameLabel;
+        private Label TypeOfSurfaceLabel;
+        private Label OutsideBoundaryConditionLabel;
+        private Label MaterialNameLabel;
+        private Label ThicknessLabel;
+        private Label ConductivityLabel;
+        private Label DensityLabel;
+        private Label SpecificHeatLabel;
+        private Label XVerticalLabel;
+        private Label YVerticalLabel;
+        private Label ZVerticalLabel;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem fileToolStripMenuItem;
+        private ToolStripMenuItem openToolStripMenuItem;
+        private ToolStripMenuItem saveToolStripMenuItem;
+        private ToolStripMenuItem saveAsToolStripMenuItem;
     }
 }
