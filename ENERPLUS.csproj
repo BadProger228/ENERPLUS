@@ -10,7 +10,12 @@
 
   <ItemGroup>
     <PackageReference Include="HelixToolkit" Version="2.25.0" />
+    <PackageReference Include="Microsoft.VisualStudio.UnitTesting" Version="11.0.50727.1" />
     <PackageReference Include="OpenTK.GLControl" Version="4.0.1" />
   </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="dotnet test --no-build --logger &quot;console;verbosity=normal&quot;&#xD;&#xA;" />
+  </Target>
 
 </Project>

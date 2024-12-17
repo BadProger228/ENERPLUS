@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace ENERPLUS
 {
-    internal class IDF
+    public class IDF
     {
         public enum MaterialType
         {
