@@ -7,23 +7,33 @@ EnergyPlus File Builder is a tool for generating configuration files for the Ene
 **Features**
 
 Create configuration files for EnergyPlus.
+
 Add zones, surfaces (with 3 or 4 points), and materials with custom characteristics.
+
 Save and load files (only those created in this program).
 
 
 **Technologies Used**
 
 Programming Language: C#
+
 Framework: WinForms
+
 Data Storage Format: JSON
+
 Libraries Used
+
 BenchmarkDotNet – for performance benchmarking.
+
 Microsoft.VisualStudio.UnitTesting – for unit testing.
 
 
 **How to Run**
 
 Install .NET Framework (if required).
+
 Open the project in Visual Studio.
+
 Ensure all dependencies are installed (via NuGet packages).
+
 Build and run the application.
