@@ -23,23 +23,20 @@ namespace ENERPLUS
         }
         private void ApplyModernStyle()
         {
-            // Общие настройки формы
             this.BackColor = Color.LightGray;
             this.Font = new Font("Segoe UI", 9F, FontStyle.Regular);
 
-            // Кастомизация кнопок
             foreach (Control control in this.Controls)
             {
                 if (control is Button button)
                 {
-                    button.BackColor = Color.FromArgb(0, 120, 215); // Синий цвет
+                    button.BackColor = Color.FromArgb(0, 120, 215); 
                     button.ForeColor = Color.White;
                     button.FlatStyle = FlatStyle.Flat;
                     button.FlatAppearance.BorderSize = 0;
                     button.Cursor = Cursors.Hand;
                     button.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
 
-                    // Скругленные углы
                     button.Paint += (sender, e) =>
                     {
                         Rectangle bounds = button.ClientRectangle;
@@ -61,7 +58,6 @@ namespace ENERPLUS
                 }
             }
 
-            // Меню (MenuStrip)
             menuStrip1.BackColor = Color.FromArgb(240, 240, 240);
             menuStrip1.RenderMode = ToolStripRenderMode.Professional;
         }

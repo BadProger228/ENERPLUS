@@ -82,7 +82,7 @@ namespace ENERPLUS
         private class Construction
         {
             public string Name { get; set; }
-            public string MaterialName { get; set; }
+            public string MaterialName { get; set; } = null;
         }
 
         private List<Zone> zones = new();
@@ -513,6 +513,7 @@ namespace ENERPLUS
                 surface.Type = type;
             } // Surface Type
             surface.ConstructionName = reader.ReadLine().Replace(" ", "").Split(',')[0];
+            constructions.Add(new() { Name = surface.ConstructionName });
             surface.ZoneName = reader.ReadLine().Replace(" ", "").Split(',')[0];
             //surface.OutsideBoundaryCondition = reader.ReadLine().Replace(" ", "").Split(',')[0];
             if (Enum.TryParse(reader.ReadLine().Replace(" ", "").Split(',')[0], out OutsideBoudaryCondition outsideBoudary))
@@ -565,7 +566,17 @@ namespace ENERPLUS
             material.Density = double.Parse(reader.ReadLine().Split(',')[0]);
             material.SpecificHeat = double.Parse(reader.ReadLine().Split(';')[0]);
 
+
             materials.Add(material);
+
+            foreach(var constr in constructions)
+            {
+                if(constr.MaterialName == null)
+                {
+                    constr.MaterialName = material.Name;
+                    return;
+                }
+            }
         }
 
         private void ParseConstruction(string line, StreamReader reader)
@@ -637,3 +648,4 @@ namespace ENERPLUS
         }
     }
 }
+

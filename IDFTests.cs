@@ -3,7 +3,7 @@ using ENERPLUS;
 using System.Collections.Generic;
 using System.IO;
 
-namespace ENERPLUS.Tests
+namespace ENERPLUS
 {
     [TestClass]
     public class IDFTests
@@ -44,6 +44,21 @@ namespace ENERPLUS.Tests
             // Arrange
             string zoneName = "LivingRoom";
             var position = (X: 0.0, Y: 0.0, Z: 0.0);
+
+            // Act
+            _idf.addZone(zoneName, position);
+            var zones = _idf.getZones();
+
+            // Assert
+            Assert.AreEqual(1, zones.Count);
+            Assert.AreEqual(zoneName, zones[0]);
+        }
+
+        public void AddZone_ShouldAddNewZoneRoom1()
+        {
+            // Arrange
+            string zoneName = "Room1";
+            var position = (X: 0.0, Y: 1.0, Z: 0.0);
 
             // Act
             _idf.addZone(zoneName, position);
@@ -169,5 +184,6 @@ namespace ENERPLUS.Tests
             // Assert
             Assert.AreEqual(0, vertices.Count);
         }
+
     }
 }

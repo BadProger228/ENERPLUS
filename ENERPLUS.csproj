@@ -9,13 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" Version="0.14.0" />
     <PackageReference Include="HelixToolkit" Version="2.25.0" />
     <PackageReference Include="Microsoft.VisualStudio.UnitTesting" Version="11.0.50727.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="NUnit" Version="4.3.1" />
     <PackageReference Include="OpenTK.GLControl" Version="4.0.1" />
   </ItemGroup>
 
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="dotnet test --no-build --logger &quot;console;verbosity=normal&quot;&#xD;&#xA;" />
-  </Target>
+  <ProjectExtensions><VisualStudio><UserProperties benchmark_3results_1json__JsonSchema="https://alec016.github.io/Custom-Machinery/Json%20Schema/src/main/resources/schemas/custom_machinery_machine.json" /></VisualStudio></ProjectExtensions>
 
+  
 </Project>

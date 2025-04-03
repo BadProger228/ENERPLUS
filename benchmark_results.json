@@ -1,0 +1,26 @@
+[
+  {
+    "Method": "LoadFile",
+    "MeanTime": 28020.889282226562
+  },
+  {
+    "Method": "SaveFile",
+    "MeanTime": 76602.15454101562
+  },
+  {
+    "Method": "AddZone",
+    "MeanTime": 82.68330891927083
+  },
+  {
+    "Method": "AddSurface",
+    "MeanTime": 372.93529510498047
+  },
+  {
+    "Method": "GetZones",
+    "MeanTime": 2.724102387825648
+  },
+  {
+    "Method": "EditZone",
+    "MeanTime": 1.2067264566818874
+  }
+]
