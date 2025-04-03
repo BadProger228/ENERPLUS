@@ -4,6 +4,12 @@
 
 EnergyPlus File Builder is a tool for generating configuration files for the EnergyPlus program. It allows users to define zones, surfaces, and materials (not predefined ones, but with user-specified characteristics). The program supports saving and opening files, but only those created within this application.
 
+
+
+
+
+
+
 **Features**
 
 Create configuration files for EnergyPlus.
@@ -11,6 +17,9 @@ Create configuration files for EnergyPlus.
 Add zones, surfaces (with 3 or 4 points), and materials with custom characteristics.
 
 Save and load files (only those created in this program).
+
+
+
 
 
 **Technologies Used**
@@ -26,6 +35,8 @@ Libraries Used
 BenchmarkDotNet – for performance benchmarking.
 
 Microsoft.VisualStudio.UnitTesting – for unit testing.
+
+
 
 
 **How to Run**
